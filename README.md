@@ -111,3 +111,25 @@ Outputs Returned to Caller
 ## Reference
 
 For the official syntax and patterns, see GitHub's documentation on [Reusable Workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
+
+
+
+
+What we want is
+    build is different based on the technology
+    test case based on the technilogy things are different
+
+Let's target the actual steps: 
+
+What is BUILD and when build is needed in programming languages ?
+    Only certain techs' need BUILD
+
+        nodejs & python are non-compilation languages
+        java & go are compilation languages ( They need compile )
+
+when and how the code is translated into machine-readable binary. Compiled languages translate the entire program into native machine code before execution. Interpreted languages translate and execute the source code line-by-line or statement-by-statement at runtime.
+
+
+Keep in mind, build phase is common across the ci-main stack and component should tell whether compile needs to execute or not.
+    For Go & Maven: We need to compile & build
+    For Python, Nodejs, Angularjs direct packaging happens.
