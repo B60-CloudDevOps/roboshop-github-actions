@@ -1,0 +1,18 @@
+on:
+  workflow_call:
+
+jobs:
+  scan:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running SAST Scan
+        run: echo "Running Static Application Security Testing" 
+
+  test:
+    runs-on: self-hosted
+    needs: scan
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running Test Cases
+        run: echo "Running Unit + Integration Testing"
