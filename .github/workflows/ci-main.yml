@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generating Artifacts
-        run: echo "Performing complile and then build"
+        run: echo "Performing complile and then build" && ls -ltr
 
   versioning:
     runs-on: self-hosted
