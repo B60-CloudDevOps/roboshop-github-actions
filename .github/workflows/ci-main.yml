@@ -21,12 +21,9 @@ jobs:
         run: echo "Running Unit + Integration Testing"
 
   build:
-    runs-on: self-hosted
-    needs: test
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generating Artifacts
-        run: echo "Performing complile and then build" && ls -ltr
+    uses: ./.github/workflows/build.yml
+    with:
+        app_type: nodejs
 
   versioning:
     runs-on: self-hosted

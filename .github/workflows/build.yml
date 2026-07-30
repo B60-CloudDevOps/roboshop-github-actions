@@ -1,0 +1,13 @@
+on:
+  workflow_call:
+    inputs:
+      app_type:
+        required: true
+        type: string
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: echo "Performing complile and then build"
