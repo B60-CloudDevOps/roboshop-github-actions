@@ -4,7 +4,6 @@ on:
       app_type:
         required: true
         type: string
-
 jobs:
   scan:
     runs-on: self-hosted
