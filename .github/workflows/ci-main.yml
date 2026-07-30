@@ -1,0 +1,69 @@
+on:
+  workflow_call:
+
+jobs:
+  scan:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running SAST Scan
+        run: echo "Running Static Application Security Testing" 
+
+  test:
+    runs-on: self-hosted
+    needs: scan
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running Test Cases
+        run: echo "Running Unit + Integration Testing"
+
+  build:
+    runs-on: self-hosted
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: echo "Performing complile and then build"
+
+  versioning:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Versioning The Artifacts
+        run: echo "Tagging the generated artifact"
+      
+  dev-deploy:
+    runs-on: self-hosted
+    needs: versioning
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: echo "Performing deployment of artifact to Development Environment"
+
+  qa-deploy:
+    runs-on: self-hosted
+    environment: qa-deploy
+    needs: dev-deploy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: echo "Performing deployment of artifact to QA Environment"
+
+  preprod-deploy:
+    runs-on: self-hosted
+    environment: preprod-deploy
+    needs: qa-deploy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: echo "Performing deployment of artifact to Pre-Prod Environment"
+
+  prod-deploy:
+    runs-on: self-hosted
+    environment: prod-deploy
+    needs: preprod-deploy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: echo "Performing deployment of artifact to Prod Environment"
