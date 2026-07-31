@@ -25,3 +25,13 @@ jobs:
           mvn compile ; 
           mvn clean package;
           ls -ltr 
+
+  python:
+    runs-on: self-hosted
+    if: inputs.app_type == 'python'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: |
+          pip3 install -r requirements.txt
+          ls -ltr 
