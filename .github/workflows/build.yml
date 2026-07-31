@@ -11,7 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generating Artifacts
-        run: npm install
+        run: |
+          npm install;
+          ls -ltr 
 
   java:
     runs-on: self-hosted
@@ -21,4 +23,5 @@ jobs:
       - name: Generating Artifacts
         run: |
           mvn compile ; 
-          mvn clean package
+          mvn clean package;
+          ls -ltr 
