@@ -33,6 +33,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Generating Artifacts
         run: |
-          sudo dnf install -y gcc python3-devel
           pip3 install -r requirements.txt
           ls -ltr
