@@ -22,9 +22,9 @@ jobs:
 
   build:
     needs: test
-    uses: ./.github/workflows/build.yml
+    uses: B60-CloudDevOps/roboshop-github-actions/.github/workflows/build.yml
     with:
-        app_type: nodejs
+        app_type: ${{ inputs.app_type }}
 
   versioning:
     runs-on: self-hosted
