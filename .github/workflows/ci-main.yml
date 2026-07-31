@@ -22,7 +22,7 @@ jobs:
 
   build:
     needs: test
-    uses: B60-CloudDevOps/roboshop-github-actions/.github/workflows/build.yml
+    uses: B60-CloudDevOps/roboshop-github-actions/.github/workflows/build.yml@main
     with:
         app_type: ${{ inputs.app_type }}
 
