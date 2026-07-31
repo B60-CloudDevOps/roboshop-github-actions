@@ -1,0 +1,35 @@
+on:
+  workflow_call:
+    inputs:
+      app_type:
+        required: true
+        type: string
+jobs:
+  nodejs:
+    runs-on: self-hosted
+    if: inputs.app_type == 'nodejs'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit Testing
+        run: |
+          npm test || true
+
+  java:
+    runs-on: self-hosted
+    if: inputs.app_type == 'java'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: |
+          mvn compile ; 
+          mvn test || true
+
+  python:
+    runs-on: self-hosted
+    if: inputs.app_type == 'python'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: |
+          echo "No Test Case - Plesae Proceed"
+

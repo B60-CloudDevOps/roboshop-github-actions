@@ -13,12 +13,10 @@ jobs:
         run: echo "Running Static Application Security Testing" 
 
   test:
-    runs-on: self-hosted
     needs: scan
-    steps:
-      - uses: actions/checkout@v4
-      - name: Running Test Cases
-        run: echo "Running Unit + Integration Testing"
+    uses: B60-CloudDevOps/roboshop-github-actions/.github/workflows/unit-testing.yml@main
+    with:
+        app_type: ${{ inputs.app_type }}
 
   build:
     needs: test
