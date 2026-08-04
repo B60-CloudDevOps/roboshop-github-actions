@@ -31,5 +31,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Generating Artifacts
         run: |
-          echo "No Test Case - Plesae Proceed"
+          echo "No Test Case - Please Proceed"
 
+  angularjs:
+    runs-on: self-hosted
+    if: inputs.app_type == 'angularjs'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generating Artifacts
+        run: |
+          echo "No Test Case - Please Proceed"
