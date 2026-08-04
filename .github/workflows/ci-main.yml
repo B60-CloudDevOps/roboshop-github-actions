@@ -27,18 +27,10 @@ jobs:
     with:
         app_type: ${{ inputs.app_type }}
         component: ${{ inputs.component }}
-
-  versioning:
-    runs-on: self-hosted
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - name: Versioning The Artifacts
-        run: echo "Tagging the generated artifact"
       
   dev-deploy:
     runs-on: self-hosted
-    needs: versioning
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - name: Generating Artifacts
