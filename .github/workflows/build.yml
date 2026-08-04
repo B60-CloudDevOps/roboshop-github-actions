@@ -13,35 +13,50 @@ jobs:
     if: inputs.app_type == 'nodejs'
     steps:
       - uses: actions/checkout@v4
-      - name: Generating Artifacts
+      - name: Build Image
         run: |
           npm install;
           IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
           docker images
+      - name: Login to ECR
+        run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w2x3d9u7
+      - name: Push Image
+        run: docker push public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG
 
   java:
     runs-on: self-hosted
     if: inputs.app_type == 'java'
     steps:
       - uses: actions/checkout@v4
-      - name: Generating Artifacts
+      - name: Build Image
         run: |
-          mvn compile ; 
+          mvn compile ;
           mvn clean package;
-          mv target/${{ inputs.component }}-1.0.jar  ${{ inputs.component }}.jar 
+          mv target/${{ inputs.component }}-1.0.jar  ${{ inputs.component }}.jar
           IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
           docker images
-         
+      - name: Login to ECR
+        run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w2x3d9u7
+      - name: Push Image
+        run: docker push public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG
+
   python:
     runs-on: self-hosted
     if: inputs.app_type == 'python'
     steps:
       - uses: actions/checkout@v4
-      - name: Generating Artifacts
+      - name: Build Image
         run: |
           pip3 install -r requirements.txt
           IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
           docker images
+      - name: Login to ECR
+        run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w2x3d9u7
+      - name: Push Image
+        run: docker push public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG
