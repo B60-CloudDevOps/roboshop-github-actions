@@ -61,3 +61,20 @@ jobs:
         run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w2x3d9u7
       - name: Push Image
         run: docker push public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG
+
+  angularjs:
+    runs-on: self-hosted
+    if: inputs.app_type == 'angularjs'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Image
+        run: |
+          echo "For anularJS there wont be any build"
+          IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
+          docker images
+      - name: Login to ECR
+        run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w2x3d9u7
+      - name: Push Image
+        run: docker push public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG
