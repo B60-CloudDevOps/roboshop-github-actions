@@ -4,6 +4,9 @@ on:
       app_type:
         required: true
         type: string
+      component:
+        required: true
+        type: string
 jobs:
   nodejs:
     runs-on: self-hosted
@@ -13,7 +16,9 @@ jobs:
       - name: Generating Artifacts
         run: |
           npm install;
-          ls -ltr 
+          IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
+          docker images
 
   java:
     runs-on: self-hosted
@@ -24,8 +29,11 @@ jobs:
         run: |
           mvn compile ; 
           mvn clean package;
-          ls -ltr 
-
+          mv target/${{ inputs.component }}-1.0.jar  ${{ inputs.component }}.jar 
+          IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
+          docker images
+         
   python:
     runs-on: self-hosted
     if: inputs.app_type == 'python'
@@ -34,4 +42,6 @@ jobs:
       - name: Generating Artifacts
         run: |
           pip3 install -r requirements.txt
-          ls -ltr
+          IMAGE_TAG=$(git rev-parse --short HEAD)-${{ github.run_number }}
+          docker build -t public.ecr.aws/w2x3d9u7/roboshop-60/${{ inputs.component }}:$IMAGE_TAG .
+          docker images
