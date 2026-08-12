@@ -23,4 +23,7 @@ jobs:
         run: | 
             cd helm
             ls -ltr
+            aws eks update-kubeconfig --region us-east-1 --name roboshop-${{ inputs.app_env }}
+            kubectl get nodes 
             helm upgrade --install ${{ inputs.component }} . -f values-${{ inputs.app_env }}.yaml
+            helm list
