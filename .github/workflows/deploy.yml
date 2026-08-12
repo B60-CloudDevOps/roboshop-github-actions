@@ -7,6 +7,9 @@ on:
       component:
         required: true
         type: string
+      app_env:
+        required: true
+        type: string
 jobs:
   scan:
     runs-on: self-hosted
