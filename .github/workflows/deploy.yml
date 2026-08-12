@@ -14,7 +14,10 @@ jobs:
   scan:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
-      - name: Docker Build
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with: 
+            repository: 'B60-CloudDevOps/roboshop-helm'
+      - name: Printing GitSha
         run: | 
             echo ${GITHUB_SHA}
