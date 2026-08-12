@@ -1,0 +1,17 @@
+on:
+  workflow_call:
+    inputs:
+      app_type:
+        required: true
+        type: string
+      component:
+        required: true
+        type: string
+jobs:
+  scan:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker Build
+        run: | 
+            echo ${GITHUB_SHA}

@@ -28,37 +28,37 @@ jobs:
         app_type: ${{ inputs.app_type }}
         component: ${{ inputs.component }}
       
-  dev-deploy:
-    runs-on: self-hosted
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generating Artifacts
-        run: echo "Performing deployment of artifact to Development Environment"
+  # dev-deploy:
+  #   runs-on: self-hosted
+  #   needs: build
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Generating Artifacts
+  #       run: echo "Performing deployment of artifact to Development Environment"
 
-  qa-deploy:
-    runs-on: self-hosted
-    environment: qa-deploy
-    needs: dev-deploy
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generating Artifacts
-        run: echo "Performing deployment of artifact to QA Environment"
+  # qa-deploy:
+  #   runs-on: self-hosted
+  #   environment: qa-deploy
+  #   needs: dev-deploy
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Generating Artifacts
+  #       run: echo "Performing deployment of artifact to QA Environment"
 
-  preprod-deploy:
-    runs-on: self-hosted
-    environment: preprod-deploy
-    needs: qa-deploy
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generating Artifacts
-        run: echo "Performing deployment of artifact to Pre-Prod Environment"
+  # preprod-deploy:
+  #   runs-on: self-hosted
+  #   environment: preprod-deploy
+  #   needs: qa-deploy
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Generating Artifacts
+  #       run: echo "Performing deployment of artifact to Pre-Prod Environment"
 
-  prod-deploy:
-    runs-on: self-hosted
-    environment: prod-deploy
-    needs: preprod-deploy
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generating Artifacts
-        run: echo "Performing deployment of artifact to Prod Environment"
+  # prod-deploy:
+  #   runs-on: self-hosted
+  #   environment: prod-deploy
+  #   needs: preprod-deploy
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Generating Artifacts
+  #       run: echo "Performing deployment of artifact to Prod Environment"
