@@ -22,6 +22,5 @@ jobs:
       - name: Printing GitSha
         run: | 
             cd helm
-            echo ${GITHUB_SHA}
-            ls -ltr 
-            pwd
+            ls -ltr
+            helm upgrade --install ${{ inputs.component }} . -f values-${{ inputs.app_env }}.yaml
