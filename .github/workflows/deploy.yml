@@ -17,9 +17,11 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/checkout@v5
         with: 
-            repository: 'B60-CloudDevOps/roboshop-helm'
+            repository: 'B60-CloudDevOps/roboshop-helm'  # This switches the repo to get the content of this repo
+            path: helm  
       - name: Printing GitSha
         run: | 
+            cd helm
             echo ${GITHUB_SHA}
             ls -ltr 
             pwd
