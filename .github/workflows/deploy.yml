@@ -21,3 +21,5 @@ jobs:
       - name: Printing GitSha
         run: | 
             echo ${GITHUB_SHA}
+            ls -ltr 
+            pwd
