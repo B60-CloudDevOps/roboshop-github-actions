@@ -13,7 +13,7 @@ RUN               curl https://raw.githubusercontent.com/helm/helm/main/scripts/
 # ARGOCD
 RUN               curl -sSL -o /bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 && chmod +x /bin/argocd
 # TRIVY
-RUN               dnf install https://github.com/aquasecurity/trivy/releases/download/v0.65.0/trivy_0.65.0_Linux-64bit.rpm -y
+RUN               dnf install https://github.com/aquasecurity/trivy/releases/download/v0.72.0/trivy_0.72.0_Linux-64bit.rpm -y
 RUN               useradd github
 USER              github
 WORKDIR           /home/github
