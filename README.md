@@ -133,3 +133,7 @@ when and how the code is translated into machine-readable binary. Compiled langu
 Keep in mind, build phase is common across the ci-main stack and component should tell whether compile needs to execute or not.
     For Go & Maven: We need to compile & build
     For Python, Nodejs, Angularjs direct packaging happens.
+
+
+# How to supply the arguments as a part of the docker run ?
+  docker run -e NAME=runner-c-1 -e TOKEN=tokennnnnn -e ORG=B60-CloudDevOps
